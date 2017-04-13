@@ -10,8 +10,6 @@ import java.awt.HeadlessException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -132,9 +130,9 @@ public class ChatLogin extends javax.swing.JFrame {
                 if(op.equals("2")){
                     this.setVisible(false); 
                     this.dispose();
-                }/* else if(op.equals("9")) {
+                } else if(op.equals("9")) {
                     JOptionPane.showMessageDialog(this, "Usuário inválido!","Atenção",JOptionPane.WARNING_MESSAGE);
-                } */
+                } 
                     
             } catch (IOException | HeadlessException e){
                 JOptionPane.showMessageDialog(this, "Falha ao conectar!","Atenção",JOptionPane.WARNING_MESSAGE);

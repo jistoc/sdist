@@ -82,7 +82,7 @@ public class Servidor extends Thread{
             usuarios.add(new Usuario(usuario,ip,porta));
             listarUsuarios();
         } else {
-            //enviarPrivado(ip,Integer.toString(porta),"9#");
+            enviarPrivado(ip,Integer.toString(porta),"9#");
         }
     } 
     private boolean verificarUsuario(String usuario){
