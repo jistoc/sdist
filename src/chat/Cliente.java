@@ -12,6 +12,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 /**
  *
@@ -55,18 +56,24 @@ public class Cliente extends Thread {
         socket.send(out);
         m = new byte[1024];
         DatagramPacket in = new DatagramPacket(m, m.length);
-        socket.receive(in);
-        String stringData = new String(in.getData()).trim();
-        String[] op = stringData.split("#");
-        
-        if (op[0].equals("2")) {
-            threadCliente = new Thread(this);
-            threadCliente.start();
-            cli = new ChatView(this);
-            cli.setVisible(true);
-            atualizarUsuarios(in);
-        } else if (op[0].equals("9")){
-            throw new UserException("Usuário já existe");
+        try{
+            socket.setSoTimeout(2000);
+            socket.receive(in);
+            String stringData = new String(in.getData()).trim();
+            String[] op = stringData.split("#");
+            socket.setSoTimeout(0);
+            if (op[0].equals("2")) {
+                threadCliente = new Thread(this);
+                threadCliente.start();
+                cli = new ChatView(this);
+                cli.setVisible(true);
+                atualizarUsuarios(in);
+            } else if (op[0].equals("9")){
+                throw new UserException("Usuário já existe");
+            }
+        } catch (SocketTimeoutException e){
+            socket.setSoTimeout(0);
+            throw new UserException("Falha ao conectar com o servidor!");
         }
     }
     public void atualizarMensagens(DatagramPacket pacote) throws IOException{

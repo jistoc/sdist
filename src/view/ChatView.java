@@ -247,7 +247,6 @@ public class ChatView extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Escolha um usuário", "Atenção", JOptionPane.WARNING_MESSAGE);
                 }
-                
             } else {
                 JOptionPane.showMessageDialog(this, "Mensagem vazia!", "Atenção", JOptionPane.WARNING_MESSAGE);
 
